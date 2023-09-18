@@ -1,0 +1,204 @@
+/************ Coundown Timer **************/
+/*
+ * Author - Harshen Amarnath Pandey
+ * Version - 1.0.8
+ * Release - 18th April 2015
+ * Copyright (c) 2014 - 2018 Harshen Pandey
+*/
+
+/* jquery.countdownTimer.css*/
+
+.style {
+    width: 100%;
+    font-family: sans-serif;
+    font-weight: bold;
+    border-style: solid;
+}
+
+.colorDefinition {
+    background: #000000;
+    color : #FFFFFF;
+    border-color: #F0068E;
+}
+
+.size_xl {
+    text-align: center;
+    font-size:50px;
+    border-width: 7px;
+    border-radius: 5px;
+}
+
+.size_lg {
+    text-align: center;
+    font-size:40px;
+    border-width: 7px;
+    border-radius: 5px;
+}
+
+/***************END TIMER*****************/
+
+/* Error message classes */
+.error-message {
+    width: 100%;
+    height: 50px;
+    padding-top: 10px;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 20px;
+    background-color:indianred;
+    color: #ffffff;
+    border-radius: 5px;
+}
+
+/* Warning message classes */
+.warning-message {
+    width: 100%;
+    height: 50px;
+    padding-top: 10px;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 20px;
+    background-color:lightcoral;
+    color: #ffffff;
+    border-radius: 5px;
+}
+
+/* Success message classes */
+.success-message {
+    width: 100%;
+    height: 50px;
+    padding-top: 10px;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 20px;
+    background-color: lightseagreen;
+    color: #ffffff;
+    border-radius: 5px;
+}
+
+/* Sign IN Part */
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+    margin-bottom: 10px;
+}
+
+.form-signin .checkbox {
+    font-weight: normal;
+}
+
+.form-signin .form-control {
+    position: relative;
+    height: auto;
+    -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+            box-sizing: border-box;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+
+.form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.form-signin-heading {
+    text-align: center;
+}
+
+/* Helper CSS */
+.text-22px {
+    font-size: 22px;
+}
+
+.p-t-sm {
+    padding-top: 10px;
+}
+
+.f-16 {
+    font-size: 16px;
+}
+
+.alert-message-color {
+    color: orangered;
+}
+
+.m-l-0 {
+    margin-left: 0;
+}
+
+.p-l-0 {
+    padding-left: 0;
+}
+
+.m-r-0 {
+    margin-right: 0;
+}
+
+.p-r-0 {
+    padding-right: 0;
+}
+
+.m-r-15 {
+    margin-right: 15px;
+}
+
+.list-head {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.mini-container {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.nice-border {
+    border: solid 1px #000000;
+    border-radius: 3px;
+}
+
+.p-a-sm {
+    padding: 3%;
+}
+
+.bg-list-item {
+    padding: 5px 2% 5px 2%;
+    background-color: #A9A9A9;
+    border-radius: 3px;
+}
+.list-item {
+    margin-left: 5px;
+    background-color: navajowhite;
+    padding: 2px;
+    border-radius: 3px;
+}
+
+.check-label {
+    padding-left: 22px;
+    font-size: 22px;
+}
+
+.custom-checkbox {
+    height: 25px;
+    width: 25px;
+}
+.custom-checkbox:hover {
+    cursor: pointer;
+}

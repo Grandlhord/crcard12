@@ -82,42 +82,117 @@
 	<h2 class="text-center">Dashboard</h2>
 	<p class="text-center">Authorized Card Number: 5531886652142950, Pin code: 3310</p>
 	<p class="text-center">Login Email: tester@gmail.com, Password: 12345</p>
-<?php 
-	// Get branches data from database
-	$sql = "SELECT * FROM branch";
-	$result = $conn->query($sql);
+	<?php 
+    // Get branches data from the database
+    $sql = "SELECT * FROM branch";
+    $result = $conn->query($sql);
 
-	if ($result->num_rows > 0) {
-	    // output data of each row
-	    while($row = $result->fetch_assoc()) {
-	    	$name = $row["name"];
-	        
-			echo '
-				<div class="col-xs-6 col-md-4">
-					<div class="panel panel-success">
-						<div class="panel-heading">
-							<h3>'.$name.' Branch</h3>
-						</div>
-						<div class="panel-body">
-							<form method="POST" action="" class="form-group">
-								<label>Your Card Number</label>
-								<input type="text" name="card_number" class="form-control" required/>
-								<br/>
-								<label>Your PIN</label>
-								<input type="password" name="pin" class="form-control" required/>
-								<input type="hidden" name="branch_id" value="'.$row["id"].'"/>
-								<br/>
-								<input class="btn btn-success btn-block" type="submit" name="submit" value="Withdraw"/>
-							</form>
-						</div>
-					</div>
-				</div>
-			';
-	    }
-	} else {
-	    echo "0 results";
-	}
-	// $conn->close();
+    if ($result->num_rows > 0) {
+        // Store bank names and IDs for later use
+        $banks = array();
+        
+        echo '<div class="col-xs-6 col-md-4">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 id="bankName">'.$result->fetch_assoc()["name"].' Branch</h3>
+                        <div class="hamburger-menu">
+                            <div class="menu-icon">&#9776;</div>
+                            <ul class="bank-list">';
+        
+        // Output data of each row
+        while($row = $result->fetch_assoc()) {
+            $banks[] = array(
+                'id' => $row["id"],
+                'name' => $row["name"]
+            );
+            
+            // Create a list of banks in the menu
+            echo '<li data-id="'.$row['id'].'">'.$row['name'].'</li>';
+        }
+        
+        echo '          </ul>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <form method="POST" action="" class="form-group">
+                            <label>Your Card Number</label>
+                            <input type="text" name="card_number" class="form-control" required/>
+                            <br/>
+                            <label>Your PIN</label>
+                            <input type="password" name="pin" class="form-control" required/>
+                            <input type="hidden" id="selectedBranchId" name="branch_id" value="'.$banks[0]["id"].'"/>
+                            <br/>
+                            <input class="btn btn-success btn-block" type="submit" name="submit" value="Withdraw"/>
+                        </form>
+                    </div>
+                </div>
+            </div>';
+    } else {
+        echo "0 results";
+    }
 ?>
+
+<!-- Add the following CSS and JavaScript code below the PHP code -->
+
+<style>
+    .hamburger-menu {
+        display: inline-block;
+        float: right;
+        cursor: pointer;
+    }
+    
+    .menu-icon {
+        font-size: 18px;
+        padding: 5px;
+    }
+    
+    .bank-list {
+        display: none;
+        position: absolute;
+        background-color: #fff;
+        list-style-type: none;
+        padding: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        border: 1px solid #ccc;
+        z-index: 1;
+    }
+    
+    .bank-list li {
+        cursor: pointer;
+        padding: 5px;
+    }
+</style>
+
+<script>
+    // JavaScript to toggle the bank list when the menu is clicked
+    const menuIcon = document.querySelector('.menu-icon');
+    const bankList = document.querySelector('.bank-list');
+    const bankName = document.getElementById('bankName');
+    const selectedBranchId = document.getElementById('selectedBranchId');
+    
+    menuIcon.addEventListener('click', function() {
+        bankList.classList.toggle('show');
+    });
+    
+    // JavaScript to handle bank selection
+    const bankItems = document.querySelectorAll('.bank-list li');
+    
+    bankItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const branchId = this.getAttribute('data-id');
+            const selectedBankName = this.textContent;
+            
+            // Update the panel heading with the selected bank name
+            bankName.textContent = selectedBankName;
+            
+            // Update the hidden input field with the selected branch ID
+            selectedBranchId.value = branchId;
+            
+            // Hide the bank list
+            bankList.classList.remove('show');
+        });
+    });
+</script>
+
 
 </div>

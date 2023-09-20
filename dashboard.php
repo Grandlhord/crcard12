@@ -79,9 +79,9 @@
 ?>
 
 <div class="row">
-	<h2 class="text-center">Dashboard</h2>
+	<!-- <h2 class="text-center">Dashboard</h2>
 	<p class="text-center">Authorized Card Number: 5531886652142950, Pin code: 3310</p>
-	<p class="text-center">Login Email: tester@gmail.com, Password: 12345</p>
+	<p class="text-center">Login Email: tester@gmail.com, Password: 12345</p> -->
 	<?php 
     // Get branches data from the database
     $sql = "SELECT * FROM branch";
@@ -91,13 +91,14 @@
         // Store bank names and IDs for later use
         $banks = array();
         
-        echo '<div class="col-xs-6 col-md-4">
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        <h3 id="bankName">'.$result->fetch_assoc()["name"].' Branch</h3>
-                        <div class="hamburger-menu">
-                            <div class="menu-icon">&#9776;</div>
-                            <ul class="bank-list">';
+        echo '<div class="row justify-content-center">
+                <div class="col-xs-6 col-md-4">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <h3 class="d-inline-block" id="bankName">'.$result->fetch_assoc()["name"].' Branch</h3>
+                            <div class="hamburger-menu d-inline-block">
+                                <div class="menu-icon">&#9776;</div>
+                                <ul class="bank-list">';
         
         // Output data of each row
         while($row = $result->fetch_assoc()) {
@@ -110,20 +111,22 @@
             echo '<li data-id="'.$row['id'].'">'.$row['name'].'</li>';
         }
         
-        echo '          </ul>
+        echo '                  </ul>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="panel-body">
-                        <form method="POST" action="" class="form-group">
-                            <label>Your Card Number</label>
-                            <input type="text" name="card_number" class="form-control" required/>
-                            <br/>
-                            <label>Your PIN</label>
-                            <input type="password" name="pin" class="form-control" required/>
-                            <input type="hidden" id="selectedBranchId" name="branch_id" value="'.$banks[0]["id"].'"/>
-                            <br/>
-                            <input class="btn btn-success btn-block" type="submit" name="submit" value="Withdraw"/>
-                        </form>
+                        <div class="panel-body">
+                            <form method="POST" action="" class="form-group">
+                                <label>Your Card Number</label>
+                                <input type="text" name="card_number" class="form-control" required/>
+                                <br/>
+                                <label>Your PIN</label>
+                                <input type="password" name="pin" class="form-control" required/>
+                                <input type="hidden" id="selectedBranchId" name="branch_id" value="'.$banks[0]["id"].'"/>
+                                <br/>
+                                <input class="btn btn-success btn-block" type="submit" name="submit" value="Withdraw"/>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>';
@@ -132,12 +135,15 @@
     }
 ?>
 
+
+
+
 <!-- Add the following CSS and JavaScript code below the PHP code -->
 
 <style>
     .hamburger-menu {
-        display: inline-block;
-        float: right;
+        /* display: inline-block;
+        float: right; */
         cursor: pointer;
     }
     
@@ -161,6 +167,9 @@
         cursor: pointer;
         padding: 5px;
     }
+
+
+
 </style>
 
 <script>

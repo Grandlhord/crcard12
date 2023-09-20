@@ -1,4 +1,3 @@
-<!-- Check for a valid transaction -->
 <?php
 	session_start();
 
@@ -13,7 +12,7 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Credit Card Faurd Detecting System</title>
+	<title>Credit Card Fraud Detecting System</title>
 
 	<!-- Load all static files -->
 	<link rel="stylesheet" type="text/css" href="assets/BS/css/bootstrap.min.css">
@@ -44,7 +43,7 @@
 						$rest_amount = $total_balance - $amount;
 						$update_query = "UPDATE account SET balance=".$rest_amount." WHERE id=".$acc_table_id;
 						$conn->query($update_query);
-						// Now it's time to add a row on transaction table
+						// Now it's time to add a row on the transaction table
 						$add_trans_sql = "INSERT INTO transaction (account_id, branch_id, amount) VALUES (".$acc_table_id.", ".$branch_pk.", ".$amount.")";
 						$conn->query($add_trans_sql);
 						unset($_SESSION["branch_pk"]); 
@@ -54,7 +53,12 @@
 
 					}else {
 						// show error message (when maximum limit)
-						echo '<p class="error-message">Sorry!! Maximum limit reached. Try Again!!</p>';
+						echo '<p class="error-message">Sorry!! Maximum limit reached. Your account has been blocked. Please contact customer support.</p>';
+						// Automatically block the account
+						$update_block_sql = "UPDATE account SET is_blocked=1 WHERE id=".$acc_table_id;
+						$conn->query($update_block_sql);
+
+						
 					}
 				}else {
 					// show error message (When insufficient funds)
@@ -70,7 +74,7 @@
 		<?php
 			if(isset($_SESSION['account'])) {
 				$account_pk = $_SESSION['account_id'];
-				// Warning OR Notification about last blocking message
+				// Warning OR Notification about the last blocking message
 				$blocked_sql = "SELECT block_history.account_id, block_history.branch_id, created_at, branch.id, branch.name as branch_name FROM block_history, branch WHERE block_history.account_id=".$account_pk." AND block_history.branch_id=branch.id ORDER BY created_at DESC";
 				
 				$blocked_last_row = $conn->query($blocked_sql);
@@ -81,14 +85,13 @@
 					$blocked_branch_name = $blocked_row[4];
 
 					// Show Warning
-					echo '<p class="warning-message">You account was tryng to access from <strong>'.$blocked_branch_name.'</strong> at <strong>'.$blocked_timestamp.'</strong></p>';
+					echo '<p class="warning-message">Your account was trying to access from <strong>'.$blocked_branch_name.'</strong> at <strong>'.$blocked_timestamp.'</strong></p>';
 				}
-
 
 				$ac_number = $_SESSION['account'];
 				$account_id = $_SESSION['account_id'];
 
-				// Get data from account table
+				// Get data from the account table
 				$sql = "SELECT * FROM account WHERE id=".$account_id;
 				$result = $conn->query($sql);
 
@@ -124,14 +127,14 @@
 			<div id="s_timer"></div>
 			<p class="p-t-sm f-16 alert-message-color">
 				<strong>Note:</strong> You just have 60 seconds to finish this transaction. 
-				If you missed to finish you have re-enter your AC number and PIN. 
+				If you missed to finish, you have to re-enter your AC number and PIN. 
 			</p>
 		</div>
 	</div>
 	
 </body>
 <footer>
-	<!-- All the Javascript will be load here... -->
+	<!-- All the JavaScript will be loaded here... -->
 	<script type="text/javascript" src="assets/JS/jquery-3.1.1.min.js"></script>
 	<script type="text/javascript" src="assets/JS/jquery.countdownTimer.min.js"></script>
 	<script type="text/javascript" src="assets/JS/main.js"></script>

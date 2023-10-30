@@ -91,7 +91,7 @@
         // Store bank names and IDs for later use
         $banks = array();
         
-        echo '<div class="row justify-content-center">
+        echo '<div class="row-justify-content-center">
                 <div class="col-xs-6 col-md-4">
                     <div class="panel panel-success">
                         <div class="panel-heading">
@@ -137,10 +137,11 @@
 
 
 
-
-<!-- Add the following CSS and JavaScript code below the PHP code -->
-
 <style>
+    .row-justify-content-center{
+        display: flex;
+    justify-content: center;
+    }
     .hamburger-menu {
         /* display: inline-block;
         float: right; */

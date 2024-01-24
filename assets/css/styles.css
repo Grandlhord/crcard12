@@ -8,9 +8,7 @@
 
 /* jquery.countdownTimer.css*/
 
-body{
-    background-image: url(\walmart_primer_background.jpg);
-}
+
 
 .style {
     width: 100%;
@@ -53,6 +51,8 @@ body{
     color: #ffffff;
     border-radius: 5px;
 }
+
+
 
 /* Warning message classes */
 .warning-message {

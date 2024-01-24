@@ -66,10 +66,8 @@
 				}
 				
 			}
-		?>
-	</div>
 
-	<!-- This part will show first -->
+?>
 	<div class="row m-r-0 m-l-0">
 		<?php
 			if(isset($_SESSION['account'])) {
